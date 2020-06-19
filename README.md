@@ -3,7 +3,7 @@
 Saturday 20/06/20 to Tuesday 24/06/20
 Commencing 5am
 
-Theme: TBA
+Theme: CONNECTIONS
 
 ## Set-up instructions
 
