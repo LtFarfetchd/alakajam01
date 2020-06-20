@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Ground
   - Platform
+  - Latchable
   layers:
   - Default
   - TransparentFX
