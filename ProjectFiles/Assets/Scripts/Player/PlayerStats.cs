@@ -26,7 +26,8 @@ public class PlayerStats : MonoBehaviour
     }
     //Stores the StatsToBuff class in a variable for this script to access
     public StatsToBuff CheckStats;
-    
+ 
+
     //Assigns the stat values, making the initial starting stats derived from the base stats
     void StartStats(BaseStats b_Stats, StatsToBuff CheckStats)
     {
@@ -36,14 +37,7 @@ public class PlayerStats : MonoBehaviour
         CheckStats.player_MoveSpeed = b_Stats.moveSpeed;
     }
 
-   
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  
 
     // Update is called once per frame
     void Update()
