@@ -5,6 +5,12 @@ Commencing 5am
 
 Theme: CONNECTIONS
 
+## Docs
+
+- [trello](https://trello.com/b/EOsKQltw/alakajam)
+- [planning document](https://docs.google.com/document/d/1X0Y_sOnRViErcjPIDHkGTIYM_j_ybjS2Hv87sENDMwM/edit?usp=sharing)
+- [submission](https://alakajam.com/scorespace-alakajam/919/undetermined/)
+
 ## Set-up instructions
 
 - clone the repo
