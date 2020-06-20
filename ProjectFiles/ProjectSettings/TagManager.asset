@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Platform
   - Latchable
+  - LatchRoof
+  - LatchWall
   layers:
   - Default
   - TransparentFX

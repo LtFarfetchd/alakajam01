@@ -533,7 +533,9 @@ MonoBehaviour:
   PlayStat: {fileID: 0}
   PlayCon: {fileID: 0}
   rigBod: {fileID: 0}
-  Latched: 1
+  WallLatched: 0
+  RoofLatched: 0
+  CreatureLatched: 0
 --- !u!114 &936051202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,7 +1102,7 @@ GameObject:
   - component: {fileID: 1461205568}
   m_Layer: 8
   m_Name: ClimbWall
-  m_TagString: Wall
+  m_TagString: LatchWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1292,7 +1294,7 @@ GameObject:
   - component: {fileID: 1754685160}
   m_Layer: 8
   m_Name: ClimbWall (1)
-  m_TagString: Wall
+  m_TagString: LatchWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
