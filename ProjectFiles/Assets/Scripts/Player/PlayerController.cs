@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Latched = Latched && Input.GetKey(KeyCode.LeftShift);
+        rigBod.gravityScale = Latched ? 0 : 1;
+
         //Using 2D Rigidbody physics to controll jumping, adds the gravity without any extra hassle
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true) 
         {
@@ -77,25 +80,9 @@ public class PlayerController : MonoBehaviour
         }
 
         //Should latch the player to a wall, just testing with walls, will move on to platforms once this works
-        if (Other.gameObject.tag == "Wall" && Latched == false) 
+        if (Other.gameObject.tag == "Wall" && !Latched) 
         {
-            if (Input.GetKey(KeyCode.LeftShift)) 
-            {
-                Latched = true;
-                //Should for as long as you're colliding with a wall and pressing Shift down =, make the position equal the x position of that wall offset by 0.1 so you don't glitch into the wall
-                gameObject.transform.position = new Vector2(Other.gameObject.transform.position.x + 1, transform.position.y);
-                
-            }
-            
-        }
-        //Should detatch you from the wall
-        if (Other.gameObject.tag == "Wall" && Latched == true)
-        {
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                Latched = false;
-                gameObject.transform.position = new Vector2(transform.position.x, transform.position.y);
-            }
+            Latched = Input.GetKey(KeyCode.LeftShift);
         }
 
     }
