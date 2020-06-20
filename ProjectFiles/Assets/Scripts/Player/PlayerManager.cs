@@ -36,15 +36,11 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
+
         WallLatchCheck();
         //RoofLatchCheck();
-=======
-        //WallLatchCheck();
-        RoofLatchCheck();
->>>>>>> 2f27bb88b84a572342cfc17234a879552a63778f
-        //Latched = Latched && Input.GetKey(KeyCode.LeftShift);
-        //rigBod.gravityScale = Latched ? 0 : 1;
+
+
 
         if (WallLatched == true && Input.GetKeyDown(KeyCode.LeftShift))
         {
