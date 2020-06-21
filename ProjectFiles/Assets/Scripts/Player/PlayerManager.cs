@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
         PlayCon = GetComponent<PlayerController>();
         PlayStat = GetComponent<PlayerStats>();
         WallLatched = false;
+        RoofLatched = false;
         rigBod = GetComponent<Rigidbody2D>();
     }
 
@@ -37,64 +38,34 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
 
-        WallLatchCheck();
-        //RoofLatchCheck();
-
-
-
         if (WallLatched == true && Input.GetKeyDown(KeyCode.LeftShift))
         {
+            //rigBod.constraints = RigidbodyConstraints2D.None;
+            //rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            WallLatched = false;
+
+            LatchMove.enabled = false;
             rigBod.constraints = RigidbodyConstraints2D.None;
             rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
-            WallLatched = false;
+            rigBod.gravityScale = 1;
+            PlayCon.enabled = true;
+            Debug.Log("Wall Latch = " + WallLatched);
+
         }
 
         if (RoofLatched == true && Input.GetKeyDown(KeyCode.LeftShift))
         {
+            //rigBod.constraints = RigidbodyConstraints2D.None;
+            //rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            RoofLatched = false;
+
+            LatchMove.enabled = false;
             rigBod.constraints = RigidbodyConstraints2D.None;
             rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
-            RoofLatched = false;
-        }
-    }
+            rigBod.gravityScale = 1;
+            PlayCon.enabled = true;
+            Debug.Log("Roof Latch = " + RoofLatched);
 
-    public void WallLatchCheck() 
-    {
-        switch (WallLatched) 
-        {
-            case false:
-                LatchMove.enabled = false;
-                rigBod.constraints = RigidbodyConstraints2D.None;
-                rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rigBod.gravityScale = 1;
-                PlayCon.enabled = true;
-                break;
-            case true:
-                LatchMove.enabled = true;
-                rigBod.constraints = RigidbodyConstraints2D.FreezePositionX;
-                rigBod.gravityScale = 0;
-                PlayCon.enabled = false;
-                break;
-        }
-    }
-
-    public void RoofLatchCheck() 
-    {
-        switch (RoofLatched) 
-        {
-            case false:
-                LatchMove.enabled = false;
-                rigBod.constraints = RigidbodyConstraints2D.None;
-                rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
-                rigBod.gravityScale = 1;
-                PlayCon.enabled = true;
-                break;
-            case true:
-                LatchMove.enabled = true;
-                rigBod.constraints = RigidbodyConstraints2D.FreezePositionY;
-                rigBod.gravityScale = 0;
-                PlayCon.enabled = false;
-                break;
-           
         }
     }
 
@@ -102,20 +73,55 @@ public class PlayerManager : MonoBehaviour
     {
         if (Other.gameObject.tag == "LatchWall" && Input.GetKey(KeyCode.LeftShift))
         {
+            Debug.Log("Roof Latch_Collision = " + RoofLatched);
             if (WallLatched == false)
             {
                 WallLatched = true;
+                LatchMove.enabled = true;
+                rigBod.constraints = RigidbodyConstraints2D.FreezePositionX;
+                rigBod.gravityScale = 0;
+                PlayCon.enabled = false;
             }
 
         }
         if (Other.gameObject.tag == "LatchRoof" && Input.GetKey(KeyCode.LeftShift))
         {
+            Debug.Log("Roof Latch_Collision = " + RoofLatched);
             if (RoofLatched == false)
             {
                 RoofLatched = true;
+                LatchMove.enabled = true;
+                rigBod.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rigBod.gravityScale = 0;
+                PlayCon.enabled = false;
+                Debug.Log("Roof Latch = " + RoofLatched);
             }
 
         }
 
+    }
+
+    private void OnCollisionExit2D(Collision2D Other)
+    {
+        if (Other.gameObject.tag == "LatchWall" && WallLatched == true) 
+        {
+            WallLatched = false;
+            LatchMove.enabled = false;
+            rigBod.constraints = RigidbodyConstraints2D.None;
+            rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rigBod.gravityScale = 1;
+            PlayCon.enabled = true;
+        }
+
+        if (Other.gameObject.tag == "LatchRoof" && RoofLatched == true) 
+        {
+            RoofLatched = false;
+
+            LatchMove.enabled = false;
+            rigBod.constraints = RigidbodyConstraints2D.None;
+            rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rigBod.gravityScale = 1;
+            PlayCon.enabled = true;
+        }
     }
 }
