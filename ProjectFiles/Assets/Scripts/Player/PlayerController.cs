@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     //Checks to see if the player is on a surface to jump off of
     public bool Grounded;
 
+    public SpriteRenderer CharacterImage;
    
 
  
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         play_Stats = GetComponent<PlayerStats>();
         play_man = GetComponent<PlayerManager>();
+        CharacterImage = GetComponentInChildren<SpriteRenderer>();
         Grounded = false;
      
     }
@@ -44,11 +46,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector2(transform.position.x - play_Stats.CheckStats.player_MoveSpeed * Time.deltaTime, transform.position.y);
+            CharacterImage.flipX = false;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector2(transform.position.x + play_Stats.CheckStats.player_MoveSpeed * Time.deltaTime, transform.position.y);
+           CharacterImage.flipX = true;
         }
    
 
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
 
     //Stops the player from spam jumping
-    public void OnCollisionEnter2D(Collision2D Other)
+    public void OnCollisionStay2D(Collision2D Other)
     {
         if (Other.gameObject.tag == "Ground" || Other.gameObject.tag == "Platform")
         {

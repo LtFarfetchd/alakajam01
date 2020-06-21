@@ -148,7 +148,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5291361503995034563}
   - component: {fileID: 5291361503995034560}
-  - component: {fileID: 5291361503995034561}
   - component: {fileID: 5291361503995034566}
   - component: {fileID: 5291361503995034567}
   m_Layer: 0
@@ -195,22 +194,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &5291361503995034561
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5291361503995034564}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.36, y: 0.66}
-  m_Direction: 0
 --- !u!114 &5291361503995034566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +210,11 @@ MonoBehaviour:
   Creature_RigBod: {fileID: 0}
   Grounded: 0
   CStats: {fileID: 0}
+  Flyer: 0
+  Tank: 0
+  Legs: 0
+  Creature_Image: {fileID: 0}
+  movement: {x: 0, y: 0}
 --- !u!114 &5291361503995034567
 MonoBehaviour:
   m_ObjectHideFlags: 0
