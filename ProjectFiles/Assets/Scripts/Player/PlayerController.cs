@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         //Using 2D Rigidbody physics to controll jumping, adds the gravity without any extra hassle
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
         {
-            Debug.Log("Jump pls");
+            //Debug.Log("Jump pls");
             play_man.rigBod.AddForce(Vector2.up * play_Stats.CheckStats.player_JumpForce, ForceMode2D.Impulse);
         }
 
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Other.gameObject.tag == "Ground" || Other.gameObject.tag == "Platform")
         {
-            Debug.Log("Grounded = " + Grounded);
+            //Debug.Log("Grounded = " + Grounded);
             Grounded = true;
         }
 
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Other.gameObject.tag == "Ground" || Other.gameObject.tag == "Platform")
         {
-            Debug.Log("Grounded = " + Grounded);
+            //Debug.Log("Grounded = " + Grounded);
             Grounded = false;
         }
 
