@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1318804308784358268}
-  - component: {fileID: 1318804308784358269}
   - component: {fileID: 1318804308784358242}
   - component: {fileID: 1318804308784358243}
   - component: {fileID: 1318804308784358240}
@@ -117,22 +116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1318804308784358269
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318804308784358241}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.26
 --- !u!50 &1318804308784358242
 Rigidbody2D:
   serializedVersion: 4
@@ -190,6 +173,7 @@ MonoBehaviour:
   Flyer: 0
   Tank: 0
   Legs: 0
+  Creature_Image: {fileID: 0}
   movement: {x: 0, y: 0}
 --- !u!1 &1318804310241347212
 GameObject:
