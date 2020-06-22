@@ -625,7 +625,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941047462}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1796,6 +1796,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Legs
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129032581966108302, guid: 0f92f22aa9d02ce4f8e567e0c5639560,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129032581966108302, guid: 0f92f22aa9d02ce4f8e567e0c5639560,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129032581966108302, guid: 0f92f22aa9d02ce4f8e567e0c5639560,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 4681859742689949657, guid: 0f92f22aa9d02ce4f8e567e0c5639560,
         type: 3}
