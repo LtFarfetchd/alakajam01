@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     //Checks to see if the player is on a surface to jump off of
     public bool Grounded;
 
+    public SpriteRenderer CharacterImage;
    
 
  
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         play_Stats = GetComponent<PlayerStats>();
         play_man = GetComponent<PlayerManager>();
+        CharacterImage = GetComponentInChildren<SpriteRenderer>();
         Grounded = false;
      
     }
@@ -30,12 +32,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
+
 
         //Using 2D Rigidbody physics to controll jumping, adds the gravity without any extra hassle
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
         {
-            Debug.Log("Jump pls");
+            //Debug.Log("Jump pls");
             play_man.rigBod.AddForce(Vector2.up * play_Stats.CheckStats.player_JumpForce, ForceMode2D.Impulse);
         }
 
@@ -44,13 +48,29 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector2(transform.position.x - play_Stats.CheckStats.player_MoveSpeed * Time.deltaTime, transform.position.y);
+            CharacterImage.flipX = false;
+            play_man.Player_Anim.SetBool("Move", true);
+            play_man.Player_Anim.Play("Player_MoveAnim");
+        }
+        if (Input.GetKeyUp(KeyCode.A)) 
+        {
+            play_man.Player_Anim.SetBool("Move", false);
+           // play_man.Player_Anim.
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector2(transform.position.x + play_Stats.CheckStats.player_MoveSpeed * Time.deltaTime, transform.position.y);
+           CharacterImage.flipX = true;
+            play_man.Player_Anim.SetBool("Move", true);
+            play_man.Player_Anim.Play("Player_MoveAnim");
         }
-   
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            play_man.Player_Anim.SetBool("Move", false);
+            // play_man.Player_Anim.
+        }
+
 
     }
 
@@ -59,23 +79,23 @@ public class PlayerController : MonoBehaviour
 
 
     //Stops the player from spam jumping
-    public void OnCollisionEnter2D(Collision2D Other)
+    public void OnCollisionStay2D(Collision2D Other)
     {
         if (Other.gameObject.tag == "Ground" || Other.gameObject.tag == "Platform")
         {
-            Debug.Log("Grounded = " + Grounded);
+            //Debug.Log("Grounded = " + Grounded);
             Grounded = true;
         }
 
-       
 
+        
 
     }
     public void OnCollisionExit2D(Collision2D Other)
     {
         if (Other.gameObject.tag == "Ground" || Other.gameObject.tag == "Platform")
         {
-            Debug.Log("Grounded = " + Grounded);
+            //Debug.Log("Grounded = " + Grounded);
             Grounded = false;
         }
 

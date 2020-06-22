@@ -10,6 +10,11 @@ TagManager:
   - Latchable
   - LatchRoof
   - LatchWall
+  - Creature
+  - Spike
+  - Plant
+  - returnWallR
+  - returnWallL
   layers:
   - Default
   - TransparentFX
