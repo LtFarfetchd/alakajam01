@@ -13,6 +13,8 @@ TagManager:
   - Creature
   - Spike
   - Plant
+  - returnWallR
+  - returnWallL
   layers:
   - Default
   - TransparentFX

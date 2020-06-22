@@ -76,7 +76,7 @@ public class Plant : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             ShouldShoot = true;
         }
 

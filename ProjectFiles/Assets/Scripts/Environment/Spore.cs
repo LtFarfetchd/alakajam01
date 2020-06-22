@@ -13,6 +13,7 @@ public class Spore : MonoBehaviour
     void Start()
     {
         SporeBod = GetComponent<Rigidbody2D>();
+        StartCoroutine(Destruction());
     }
 
     // Update is called once per frame
@@ -40,5 +41,10 @@ public class Spore : MonoBehaviour
             print(P_Stat.CheckStats.player_HP);
         }
 
+    }
+    public IEnumerator Destruction() 
+    {
+        yield return new WaitForSeconds(4);
+        Destroy(this.gameObject);
     }
 }
