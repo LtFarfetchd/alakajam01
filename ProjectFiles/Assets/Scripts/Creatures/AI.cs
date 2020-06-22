@@ -11,7 +11,7 @@ public class AI : MonoBehaviour
 
 
     public SpriteRenderer CRenderer;
-    public float WalkArea;
+    public int WalkArea;
 
     private Vector3 pos1 = new Vector3(-4, 0, 0);
     private Vector3 pos2 = new Vector3(4, 0, 0);
@@ -42,6 +42,8 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (Wandering == false) 
         {
             SetArea();
