@@ -32,7 +32,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
+
 
         //Using 2D Rigidbody physics to controll jumping, adds the gravity without any extra hassle
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
@@ -47,14 +49,28 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x - play_Stats.CheckStats.player_MoveSpeed * Time.deltaTime, transform.position.y);
             CharacterImage.flipX = false;
+            play_man.Player_Anim.SetBool("Move", true);
+            play_man.Player_Anim.Play("Player_MoveAnim");
+        }
+        if (Input.GetKeyUp(KeyCode.A)) 
+        {
+            play_man.Player_Anim.SetBool("Move", false);
+           // play_man.Player_Anim.
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector2(transform.position.x + play_Stats.CheckStats.player_MoveSpeed * Time.deltaTime, transform.position.y);
            CharacterImage.flipX = true;
+            play_man.Player_Anim.SetBool("Move", true);
+            play_man.Player_Anim.Play("Player_MoveAnim");
         }
-   
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            play_man.Player_Anim.SetBool("Move", false);
+            // play_man.Player_Anim.
+        }
+
 
     }
 
@@ -71,8 +87,8 @@ public class PlayerController : MonoBehaviour
             Grounded = true;
         }
 
-       
 
+        
 
     }
     public void OnCollisionExit2D(Collision2D Other)

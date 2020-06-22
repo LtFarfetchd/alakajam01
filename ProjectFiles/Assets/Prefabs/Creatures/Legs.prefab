@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4681859742689949657}
   - component: {fileID: 5768883193885530640}
   - component: {fileID: 4129032581966108302}
+  - component: {fileID: 4765107251569170013}
   m_Layer: 0
   m_Name: Legs
   m_TagString: Creature
@@ -134,6 +135,7 @@ MonoBehaviour:
   Creature_RigBod: {fileID: 0}
   Grounded: 0
   CStats: {fileID: 0}
+  C_man: {fileID: 0}
   Flyer: 0
   Tank: 0
   Legs: 0
@@ -154,7 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementBuff: 0
-  LiveBuff: 0
   HPBuff: 0
   CreatureName: Legs
   LatchPoint: {fileID: 8301030288211369035}
@@ -205,6 +206,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4765107251569170013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910094289386059966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc331e8829c2f9448bb35b70d9a4e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Creature_Stats: {fileID: 0}
+  Creature_Movement: {fileID: 0}
+  Hived: 0
+  C_animator: {fileID: 0}
+  Animations:
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &5746266752790765643
 GameObject:
   m_ObjectHideFlags: 0

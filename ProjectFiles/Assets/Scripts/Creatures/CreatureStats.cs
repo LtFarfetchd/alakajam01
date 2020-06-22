@@ -5,7 +5,8 @@ using UnityEngine;
 public class CreatureStats : MonoBehaviour
 {
     public float MovementBuff;
-    public int LiveBuff;
+    //public int LiveBuff;
+    //public bool Hived;
     public int HPBuff;
     public string CreatureName;
     public Transform LatchPoint;

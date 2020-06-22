@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [HideInInspector]
     public LatchMovement LatchMove;
+    [HideInInspector]
     public PlayerStats PlayStat;
+    [HideInInspector]
     public PlayerController PlayCon;
-
     [HideInInspector]
     public Rigidbody2D rigBod;
     [HideInInspector]
     public Collider2D Player_Collider;
 
-    //Check whether or not the player is latched to something.
+    public int health;
+    
+    [HideInInspector]
     public bool WallLatched;
+    [HideInInspector]
     public bool RoofLatched;
+    //[HideInInspector]
     public bool CreatureLatched;
+    [HideInInspector]
     public bool UnlatchPls;
+    [HideInInspector]
+    public Animator Player_Anim;
 
-    public CreatureStats Victim_Stats;
+    public CManager Victim_Stats;
     
     [HideInInspector]
     public CreatureMovement CreatureControl;
@@ -30,12 +39,14 @@ public class PlayerManager : MonoBehaviour
         LatchMove = GetComponent<LatchMovement>();
         PlayCon = GetComponent<PlayerController>();
         PlayStat = GetComponent<PlayerStats>();
+        Player_Anim = GetComponent<Animator>();
         WallLatched = false;
         RoofLatched = false;
         CreatureLatched = false;
         UnlatchPls = false;
         Player_Collider = GetComponent<Collider2D>();
         rigBod = GetComponent<Rigidbody2D>();
+        health = PlayStat.CheckStats.player_HP;
     }
 
     private void Start()
@@ -54,13 +65,27 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CreatureLatched == true) 
+
+
+        if (CreatureLatched == true)
         {
             //Victim_Stats = GetComponentInParent<CreatureStats>();
-            gameObject.transform.position = Victim_Stats.LatchPoint.transform.position;
+            gameObject.transform.position = Victim_Stats.Creature_Stats.LatchPoint.transform.position;
             rigBod.isKinematic = true;
             Player_Collider.enabled = false;
+            //PlayStat.CheckStats.player_HP = PlayStat.CheckStats.player_HP +  Victim_Stats.Creature_Stats.HPBuff;
         }
+        //if (CreatureLatched == false) 
+        //{
+
+        //    PlayStat.CheckStats.player_HP = PlayStat.CheckStats.player_HP;
+        //    //PlayStat.StartStats();
+        //    //PlayStat.StatsToBuff.player_HP = PlayStat.b_Stats.hitPoints;
+        //    //PlayStat.CheckStats.player_HP = PlayStat.b_Stats.hitPoints;
+        //   // PlayStat.CheckStats.player_Lifepoints = PlayStat.b_Stats.lifePoints;
+        //    //PlayStat.CheckStats.player_JumpForce = PlayStat.b_Stats.jumpForce;
+        //    //PlayStat.CheckStats.player_MoveSpeed = PlayStat.b_Stats.moveSpeed;
+        //}
 
         Debug.Log("CreatureLatched = " + CreatureLatched);
 
@@ -83,6 +108,11 @@ public class PlayerManager : MonoBehaviour
         {
             //rigBod.constraints = RigidbodyConstraints2D.None;
             //rigBod.constraints = RigidbodyConstraints2D.FreezeRotation;
+            if (CreatureLatched == true)
+            {
+                
+                PlayStat.CheckStats.player_HP = PlayStat.CheckStats.player_HP + Victim_Stats.Creature_Stats.HPBuff;
+            }
             RoofLatched = false;
 
             LatchMove.enabled = false;
@@ -98,7 +128,9 @@ public class PlayerManager : MonoBehaviour
         {
             if (CreatureLatched == true) 
             {
-                Debug.Log("Unlatch pls");
+                PlayStat.CheckStats.player_HP = health;
+                CreatureLatched = false;
+                // Debug.Log("Unlatch pls");
                 StartCoroutine(UnlatchTimer());
                 transform.parent = null;
                 CreatureLatched = false;
@@ -122,6 +154,7 @@ public class PlayerManager : MonoBehaviour
             
 
         }
+        
     }
 
     public void OnCollisionEnter2D(Collision2D Other)
@@ -141,7 +174,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (Other.gameObject.tag == "LatchRoof" && Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("Roof Latch_Collision = " + RoofLatched);
+            //Debug.Log("Roof Latch_Collision = " + RoofLatched);
             if (RoofLatched == false)
             {
                 RoofLatched = true;
@@ -149,7 +182,7 @@ public class PlayerManager : MonoBehaviour
                 rigBod.constraints = RigidbodyConstraints2D.FreezePositionY;
                 rigBod.gravityScale = 0;
                 PlayCon.enabled = false;
-                Debug.Log("Roof Latch = " + RoofLatched);
+                //Debug.Log("Roof Latch = " + RoofLatched);
             }
 
         }
@@ -162,8 +195,8 @@ public class PlayerManager : MonoBehaviour
                 //CreatureControl = GetComponentInParent<CreatureMovement>();
                 transform.parent = Other.transform;
                 CreatureControl = Other.gameObject.GetComponent<CreatureMovement>();
-                Victim_Stats = Other.gameObject.GetComponent<CreatureStats>();
-                gameObject.transform.position = Victim_Stats.LatchPoint.transform.position;
+                Victim_Stats = Other.gameObject.GetComponent<CManager>();
+                gameObject.transform.position = Victim_Stats.Creature_Stats.LatchPoint.transform.position;
                 //Prey = Other.gameObject;
                 if (CreatureControl.enabled == false)
                 {
@@ -173,15 +206,28 @@ public class PlayerManager : MonoBehaviour
                 {
                     PlayCon.enabled = false;
                 }
-
                 if (LatchMove.enabled == true)
                 {
                     LatchMove.enabled = false;
                 }
+                if (Victim_Stats.Hived == false)
+                {
+                    //PlayStat.CheckStats.player_Lifepoints += 1;
+                    PlayStat.CheckStats.player_Lifepoints += 1;
+                    Victim_Stats.Hived = true;
+                    Debug.Log(Victim_Stats.Hived);
+                }
+
             }
             
             
         }
+
+        if (Other.gameObject.tag == "Spike")
+        {
+            PlayStat.CheckStats.player_HP += -1;
+        }
+
 
     }
 
@@ -215,7 +261,7 @@ public class PlayerManager : MonoBehaviour
         {
             UnlatchPls = true;
         }
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         UnlatchPls = false;
         StopAllCoroutines();
     }
