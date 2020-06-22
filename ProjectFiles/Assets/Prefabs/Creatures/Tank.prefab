@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 5291361503995034560}
   - component: {fileID: 5291361503995034566}
   - component: {fileID: 5291361503995034567}
+  - component: {fileID: 5681273917178316249}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Creature
@@ -210,6 +211,7 @@ MonoBehaviour:
   Creature_RigBod: {fileID: 0}
   Grounded: 0
   CStats: {fileID: 0}
+  C_man: {fileID: 0}
   Flyer: 0
   Tank: 0
   Legs: 0
@@ -230,7 +232,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementBuff: 0.5
-  LiveBuff: 1
   HPBuff: 5
   CreatureName: Tank
   LatchPoint: {fileID: 5291361502901609480}
+--- !u!114 &5681273917178316249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291361503995034564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc331e8829c2f9448bb35b70d9a4e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Creature_Stats: {fileID: 0}
+  Creature_Movement: {fileID: 0}
+  Hived: 0
+  C_animator: {fileID: 0}
+  Animations:
+  - 
+  - 
+  - 
+  - 

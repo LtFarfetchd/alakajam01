@@ -20,18 +20,23 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Play_Man = Player.GetComponent<PlayerManager>();
-        Latch_Man = Player.GetComponent<LatchMovement>();
-        Play_Con = Player.GetComponent<PlayerController>();
-        Play_Stats = Player.GetComponent<PlayerStats>();
-        UI_Man = GetComponent<UIManager>();
+        //Play_Man = FindObjectOfType<PlayerManager>();
+        //Latch_Man = FindObjectOfType<LatchMovement>();
+        //Play_Con = FindObjectOfType<PlayerController>();
+        //Play_Stats = FindObjectOfType<PlayerStats>();
+        //UI_Man = GetComponent<UIManager>();
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Play_Man = FindObjectOfType<PlayerManager>();
+        Latch_Man = FindObjectOfType<LatchMovement>();
+        Play_Con = FindObjectOfType<PlayerController>();
+        Play_Stats = FindObjectOfType<PlayerStats>();
+        UI_Man = GetComponent<UIManager>();
+
     }
 
     // Update is called once per frame

@@ -11,6 +11,8 @@ TagManager:
   - LatchRoof
   - LatchWall
   - Creature
+  - Spike
+  - Plant
   layers:
   - Default
   - TransparentFX

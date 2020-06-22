@@ -10,6 +10,7 @@ public class CreatureMovement : MonoBehaviour
     public Rigidbody2D Creature_RigBod;
     public bool Grounded;
     public CreatureStats CStats;
+    public CManager C_man;
 
     public bool Flyer;
     public bool Tank;
@@ -18,7 +19,7 @@ public class CreatureMovement : MonoBehaviour
     public bool Flying;
     public Floating FlyFloating;
 
-    public SpriteRenderer Creature_Image;
+    public SpriteRenderer[] Creature_Image;
 
     public Vector2 movement;
 
@@ -26,7 +27,10 @@ public class CreatureMovement : MonoBehaviour
     private void Awake()
     {
         Parasyte_Stats = FindObjectOfType<PlayerStats>();
-        Creature_Image = GetComponentInChildren<SpriteRenderer>();
+        Creature_Image = GetComponentsInChildren<SpriteRenderer>();
+        CStats = GetComponent<CreatureStats>();
+        C_man = GetComponent<CManager>();
+       
         
     }
     void Start()
@@ -49,18 +53,12 @@ public class CreatureMovement : MonoBehaviour
     {
         movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         SpeciesCheck();
+
+       
     }
     private void FixedUpdate()
     {
-        //movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        //SpeciesCheck();
-
         
-            
-        
-        
-
-
         if (Flyer == true)
         {
             FlyMovement(movement);
@@ -108,25 +106,81 @@ public class CreatureMovement : MonoBehaviour
         }
     }
 
+    //FLYER MOVEMENT
     void FlyMovement(Vector2 direction)
     {
-
+        
+            if (!Input.anyKey)
+            {
+                if (C_man.Hived == false)
+                {
+                    C_man.C_animator[0].SetBool("Move", false);
+                    C_man.C_animator[0].Play(C_man.Animations[0].ToString());
+                }
+                else 
+                {
+                    C_man.C_animator[0].SetBool("Move", false);
+                    C_man.C_animator[0].Play(C_man.Animations[3].ToString());
+                }
+            }
+        
        
         Creature_RigBod.MovePosition((Vector2)transform.position + (direction * (CStats.MovementBuff + Parasyte_Stats.CheckStats.player_MoveSpeed) * Time.deltaTime));
         if (Input.GetKey(KeyCode.D))
         {
-            Creature_Image.flipX = true;
+            Creature_Image[0].flipX = true;
+            C_man.C_animator[0].SetBool("Move", true);
+            if (C_man.Hived == false) 
+            {
+                C_man.C_animator[0].Play(C_man.Animations[1].ToString());
+            }
+            if (C_man.Hived == true) 
+            {
+                C_man.C_animator[0].Play(C_man.Animations[3].ToString());
+            }
+
+
 
         }
         if (Input.GetKey(KeyCode.A))
         {
-            Creature_Image.flipX = false;
+            Creature_Image[0].flipX = false;
+            C_man.C_animator[0].SetBool("Move", true);
+            if (C_man.Hived == false)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[01].ToString());
+            }
+            if (C_man.Hived == true)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[3].ToString());
+            }
         }
+
+
+
         
     }
+    
 
+    //TANK MOVEMENT
     public void TankMovement() 
     {
+
+        if (!Input.anyKey)
+        {
+            if (C_man.Hived == false)
+            {
+                C_man.C_animator[0].SetBool("Move", false);
+                C_man.C_animator[0].Play(C_man.Animations[0].ToString());
+            }
+            else
+            {
+                C_man.C_animator[0].SetBool("Move", false);
+                C_man.C_animator[0].Play(C_man.Animations[3].ToString());
+            }
+        }
+
+
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
         {
             //Debug.Log("Jump pls");
@@ -136,19 +190,65 @@ public class CreatureMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector2(transform.position.x - CStats.MovementBuff * Time.deltaTime, transform.position.y);
-            Creature_Image.flipX = false;
+            Creature_Image[0].flipX = false;
+
+            C_man.C_animator[0].SetBool("Move", true);
+          
+            if (C_man.Hived == false)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[1].ToString());
+               
+            }
+            if (C_man.Hived == true)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[3].ToString());
+            }
+
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector2(transform.position.x + CStats.MovementBuff * Time.deltaTime, transform.position.y);
-            Creature_Image.flipX = true;
+            Creature_Image[0].flipX = true;
+            C_man.C_animator[0].SetBool("Move", true);
+
+            if (C_man.Hived == false)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[1].ToString());
+
+            }
+            if (C_man.Hived == true)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[3].ToString());
+            }
 
         }
     }
 
+
+    //LEGS MOVEMENT
     public void LegsMovement() 
     {
+        
+            if (!Input.anyKey)
+            {
+                if (C_man.Hived == false)
+                {
+                    C_man.C_animator[0].SetBool("Move", false);
+                    C_man.C_animator[1].SetBool("Move", false);
+                    C_man.C_animator[0].Play(C_man.Animations[0].ToString());
+                    C_man.C_animator[1].Play(C_man.Animations[2].ToString());
+                }
+                else
+                {
+                    C_man.C_animator[0].SetBool("Move", false);
+                    C_man.C_animator[1].SetBool("Move", false);
+                    C_man.C_animator[0].Play(C_man.Animations[4].ToString());
+                    C_man.C_animator[1].Play(C_man.Animations[2].ToString());
+                }
+            }
+        
+
         if (Input.GetKeyDown(KeyCode.W) && Grounded == true)
         {
             //Debug.Log("Jump pls");
@@ -158,13 +258,40 @@ public class CreatureMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position = new Vector2(transform.position.x - CStats.MovementBuff * Time.deltaTime, transform.position.y);
-            Creature_Image.flipX = false;
+            Creature_Image[0].flipX = false;
+            Creature_Image[1].flipX = false;
+            C_man.C_animator[0].SetBool("Move", true);
+            C_man.C_animator[1].SetBool("Move", true);
+            if (C_man.Hived == false)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[1].ToString());
+                C_man.C_animator[1].Play(C_man.Animations[3].ToString());
+            }
+            if (C_man.Hived == true)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[5].ToString());
+                C_man.C_animator[1].Play(C_man.Animations[3].ToString());
+            }
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             transform.position = new Vector2(transform.position.x + CStats.MovementBuff * Time.deltaTime, transform.position.y);
-            Creature_Image.flipX = true;
+            Creature_Image[0].flipX = true;
+            Creature_Image[1].flipX = true;
+
+            C_man.C_animator[0].SetBool("Move", true);
+            C_man.C_animator[1].SetBool("Move", true);
+            if (C_man.Hived == false)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[1].ToString());
+                C_man.C_animator[1].Play(C_man.Animations[3].ToString());
+            }
+            if (C_man.Hived == true)
+            {
+                C_man.C_animator[0].Play(C_man.Animations[5].ToString());
+                C_man.C_animator[1].Play(C_man.Animations[3].ToString());
+            }
 
         }
     }
